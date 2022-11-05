@@ -25,6 +25,7 @@ const Slide = ({ label, right, bgColor }: Props) => {
 				styles.container,
 				{
 					backgroundColor: bgColor,
+					position: "relative",
 				},
 			]}>
 			<View

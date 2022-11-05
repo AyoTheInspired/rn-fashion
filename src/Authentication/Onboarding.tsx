@@ -2,20 +2,42 @@ import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Slide, { SLIDE_HEIGHT } from "../components/Slide";
 import Animated from "react-native-reanimated";
+import SubSlide from "../components/SubSlide";
 // import { useValue } from "react-native-redash";
 
 type Props = {};
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
+const BORDER_RADIUS = 75;
 
 const Onboarding = (props: Props) => {
 	// const onScroll = onScrollEvent({ x });
 
 	const slides = [
-		{ label: "Relaxed", bgColor: "#bfeaf5" },
-		{ label: "Playful", bgColor: "#beecc4" },
-		{ label: "Excentric", bgColor: "#FFE4D9" },
-		{ label: "Funky", bgColor: "#FFDDDD" },
+		{
+			title: "Relaxed",
+			bgColor: "#bfeaf5",
+			subtitle: "Lorem Ipsum",
+			description: "Lorem ipsum dolor sit amet",
+		},
+		{
+			title: "Playful",
+			bgColor: "#beecc4",
+			subtitle: "Lorem Ipsum",
+			description: "Lorem ipsum dolor sit amet",
+		},
+		{
+			title: "Excentric",
+			bgColor: "#FFE4D9",
+			subtitle: "Lorem Ipsum",
+			description: "Lorem ipsum dolor sit amet",
+		},
+		{
+			title: "Funky",
+			bgColor: "#FFDDDD",
+			subtitle: "Lorem Ipsum",
+			description: "Lorem ipsum dolor sit amet",
+		},
 	];
 
 	return (
@@ -27,11 +49,11 @@ const Onboarding = (props: Props) => {
 					decelerationRate="fast"
 					showsHorizontalScrollIndicator={false}
 					bounces={false}>
-					{slides.map(({ label, bgColor }, idx) => (
+					{slides.map(({ title, bgColor }, idx) => (
 						<Slide
 							right={!!(idx % 2)}
 							key={idx}
-							label={label}
+							label={title}
 							bgColor={bgColor}
 						/>
 					))}
@@ -41,16 +63,19 @@ const Onboarding = (props: Props) => {
 				<View
 					style={{
 						...StyleSheet.absoluteFillObject,
-						backgroundColor: "transparent",
+						backgroundColor: "cyan",
 					}}
 				/>
 
-				<View
-					style={{
-						flex: 1,
-						backgroundColor: "white",
-						borderTopLeftRadius: 75,
-					}}></View>
+				<View style={styles.footerContent}>
+					{slides.map(({ subtitle, description }, idx) => (
+						<SubSlide
+							key={idx}
+							last={idx === slides.length - 1}
+							{...{ subtitle, description }}
+						/>
+					))}
+				</View>
 			</View>
 		</View>
 	);
@@ -59,6 +84,11 @@ const Onboarding = (props: Props) => {
 export default Onboarding;
 
 const styles = StyleSheet.create({
+	footerContent: {
+		flex: 1,
+		backgroundColor: "white",
+		borderTopLeftRadius: BORDER_RADIUS,
+	},
 	container: {
 		flex: 1,
 		backgroundColor: "white",
@@ -67,7 +97,7 @@ const styles = StyleSheet.create({
 	slider: {
 		height: SLIDE_HEIGHT,
 		backgroundColor: "cyan",
-		borderBottomRightRadius: 75,
+		borderBottomRightRadius: BORDER_RADIUS,
 	},
 
 	footer: {
