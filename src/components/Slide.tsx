@@ -3,13 +3,14 @@ import React from "react";
 
 type Props = {
 	label: string;
+	bgColor: string;
 	right?: boolean;
 };
 
 const { width, height } = Dimensions.get("window");
 
 export const SLIDE_HEIGHT = 0.61 * height;
-const Slide = ({ label, right }: Props) => {
+const Slide = ({ label, right, bgColor }: Props) => {
 	const transform = [
 		{ translateY: (SLIDE_HEIGHT - 100) / 2 },
 		{
@@ -19,7 +20,13 @@ const Slide = ({ label, right }: Props) => {
 	];
 
 	return (
-		<View style={styles.container}>
+		<View
+			style={[
+				styles.container,
+				{
+					backgroundColor: bgColor,
+				},
+			]}>
 			<View
 				style={[
 					styles.titleContainer,
